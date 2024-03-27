@@ -54,3 +54,79 @@ function isLegaal(user: User):boolean{
     email : "hi@gmail.com",
     age : 12
  }))
+
+ //implementing interfaces
+ //Interfaces have another special property. You can implement interfaces as a class.
+ interface Person {
+    name: string;
+    age: number;
+    greet(phrase: string): void;
+}
+class Employee implements Person {
+    name: string;
+    age: number;
+
+    constructor(n: string, a: number) {
+        this.name = n;
+        this.age = a;
+    }
+
+    greet(phrase: string) {
+        console.log(`${phrase} ${this.name}`);
+    }
+}
+const e = new Employee("harkirat", 22);
+console.log(e.name);
+console.log(e.age);
+(e.greet("hi there"));
+
+//Types
+//Union
+type StringOrNumber = string | number;
+function printId(id: StringOrNumber) {
+  console.log(`ID: ${id}`);
+}
+printId(101); // ID: 101
+printId("202"); // ID: 202
+
+//intersection
+type Employee1 = {
+    name: string;
+    startDate: Date;
+};
+  
+type Manager = {
+  name: string;
+  department: string;
+};
+  
+type TeamLead = Employee1 & Manager;
+  
+const teamLead: TeamLead = {
+  name: "harkirat",
+  startDate: new Date(),
+  department: "Software developer"
+};
+console.log(teamLead);
+
+//Arrays
+//Given a list of users, filter out the users that are legal (greater than 18 years of age)
+interface User1 {
+	firstName: string;
+	lastName: string;
+	age: number;
+}
+
+function filteredUsers(users: User1[]) {
+    return users.filter(x => x.age >= 18);
+}
+
+console.log(filteredUsers([{
+    firstName: "harkirat",
+    lastName: "Singh",
+    age: 21
+}, {
+    firstName: "Raman",
+    lastName: "Singh",
+    age: 16
+}, ]));
